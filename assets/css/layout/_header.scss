@@ -1,0 +1,51 @@
+body {
+  position: relative;
+  background: #FFFFFF;
+  min-height: 45rem;
+  padding-bottom: 80px;
+}
+
+html {height:100%}
+
+/* NAVIGATION */
+
+.navbar-bg {
+  background: #337DFF;
+  background-size: 80%;
+}
+
+.dropdown-menu, .dropdown-menu.show {
+  right: 0;
+}
+
+.space-brand {
+  color: #9400D3;
+  font-weight: bold;
+}
+
+.nav-profile-img {
+  width: 60px;
+  border: 2px solid #fff;
+}
+
+/* LOGIN REGISTRATION */
+
+.form-container {
+  border-left: 2px solid #000000;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  background: #000000;
+}
+
+.inactive {
+  border-color: lightgray lightgray lightgray;
+  background: darkgray;
+  color: #efefee;
+
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  color: #000000;
+  background-color:#000000;
+}
+

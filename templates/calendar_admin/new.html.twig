@@ -1,0 +1,8 @@
+{% extends 'content_base.html.twig' %}
+{% block content_body %}
+    <h1>Create a new project!</h1>
+
+    {{ include('calendar_admin/_form.html.twig', {
+        button_text: 'Create!'
+    }) }}
+{% endblock %}

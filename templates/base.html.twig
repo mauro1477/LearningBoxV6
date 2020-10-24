@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Learning Box{% endblock %}</title>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-bg {{ app.session.flashbag.peek('success')|length > 0 ? '' : 'mb-5' }}">
+            {% if is_granted('ROLE_USER') %} <a style="margin-left: 75px;" class="navbar-brand space-brand" href="{{ path('app_homepage') }}">Learning Box</a> {% endif %}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mr-auto">
+                    {% if not is_granted('ROLE_ADMIN')%}
+                    {% if is_granted('ROLE_USER')%}
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="{{ path('app_account') }}">Accounts</a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="{{ path('app_admin_account') }}">Manage Accounts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="{{ path('admin_calendar_list') }}">Project List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="{{ path('admin_calendar_new') }}">Project New</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a style="color: #fff;" class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                    {% endif %}
+                    {% if not is_granted('ROLE_USER') %}
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="{{ path('app_login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="{{ path('app_register') }}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+        {% block body %}
+            <footer class="footer">
+                <div class="container text-center";id="footer-content">
+                    <p>Copyright © 2020 Learning Box Co. All rights reserved.</p>
+                </div>
+            </footer>
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            <script>
+                $('.custom-file-input').on('change', function(event) {
+                    var inputFile = event.currentTarget;
+                    $(inputFile).parent()
+                        .find('.custom-file-label')
+                        .html(inputFile.files[0].name);
+                });
+            </script>
+        {% endblock %}
+    </head>
+    <body>
+
+    </body>
+</html>

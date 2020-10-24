@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+{% endblock %}
+{% block title %}Manage Account!{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row user-menu-container square">
+            <div class="col-md-12 user-details">
+                <div class="row spacepurplebg white">
+                    <div class="col-md-10 no-pad">
+                        <div class="user-pad">
+                            <h3>User Account: {{ app.user.firstName }}</h3>
+                            <h3>Email: {{ app.user.email }}</h3>
+                            <h3>Password:{{ app.user.password }}</h3>
+                            <h3>Cancel your subscription below.</h3>
+                            <a class="btn btn-labeled btn-info" href="#">
+                                <span class="btn-label"><i class="fa fa-pencil"></i></span>Cancel Monthly Subscription
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
