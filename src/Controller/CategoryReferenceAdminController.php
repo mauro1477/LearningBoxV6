@@ -67,12 +67,11 @@ class CategoryReferenceAdminController extends BaseController
 
     /**
      * @Route("/admin/calendar/references/{id}/download", name="admin_calendar_download_reference", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN")
      */
     public function downloadCategoryReference(CategoryReference $reference, UploaderHelper $uploaderHelper)
     {
         $calendar = $reference->getCalendar();
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', $calendar);
+        $this->denyAccessUnlessGranted('ROLE_USER', $calendar);
         $response = new StreamedResponse(function() use ($reference, $uploaderHelper) {
             $outputStream = fopen('php://output', 'wb');
             $fileStream = $uploaderHelper->readStream($reference->getFilePath(), false);
@@ -90,10 +89,11 @@ class CategoryReferenceAdminController extends BaseController
 
     /**
      * @Route("/admin/calendar/{id}/references", methods="GET", name="admin_calendar_list_references")
-     * @IsGranted("ROLE_ADMIN")
+     *
      */
     public function getCategoryReferences(Calendar $calendar)
     {
+
         return $this->json(
             $calendar->getCategoryReferences(),
             200,
@@ -113,7 +113,6 @@ class CategoryReferenceAdminController extends BaseController
         $this->denyAccessUnlessGranted('ROLE_ADMIN', $calendar);
         $entityManager->remove($reference);
         $entityManager->flush();
-
         $uploaderHelper->deleteFile($reference->getFilePath(), false);
 
         return new Response(null, 204);

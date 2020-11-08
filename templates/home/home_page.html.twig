@@ -10,45 +10,26 @@
                 <!-- H1 Article -->
                 <a class="main-article-link" href="#">
                     <div class="main-article mb-5 pb-3">
-                        <img src="{{ asset('images/colors_pic.jpg') }}" alt="meteor shower">
-                        <h1 class="text-center mt-2">Ursid Meteor Shower: <br>Healthier than a regular shower?</h1>
+                        <img src="{{ asset('images/november.jpeg') }}" alt="meteor shower">
+                        <h1 class="text-center mt-2">November</h1>
                     </div>
                 </a>
-                <!-- Supporting Articles -->
-                <div class="article-container my-1">
-                    <a href="{{ path('calendar_show', {slug: 'why-asteroids-taste-like-bacon'}) }}">
-                        <img class="article-img" src="{{ asset('images/space-ice.jpeg') }}">
-                        <div class="article-title d-inline-block pl-3 align-middle">
-                            <span>Why do Asteroids Taste Like Bacon?</span>
-                            <br>
-                            <span class="align-left article-details"><img class="article-author-img rounded-circle" src="{{ asset('images/alien-profile.png') }}"> Mike Ferengi </span>
-                            <span class="pl-5 article-details float-right"> 3 hours ago</span>
+                <!-- Supporting Calendar -->
+                    {% for calendar in calendars %}
+                        <div class="article-container my-1">
+                        {% if calendar.publishedAt == true %}
+                            <a href="{{ path('calendar_show', {slug: calendar.slug}) }}">
+    {#                            <img class="article-img" src="{{ asset('images/asteroid.jpeg') }}">#}
+                                <div class="col-md-3 article-title d-inline-block pl-3 align-middle">
+                                    <span>{{ calendar.title }}</span>
+                                    <br>
+    {#                                <span class="pl-5 article-details float-right"> {{ calendar.publishedAt ? calendar.publishedAt }}</span>#}
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                <div class="article-container my-1">
-                    <a href="#">
-                        <img class="article-img"  src="{{ asset('images/mercury.jpeg') }}">
-                        <div class="article-title d-inline-block pl-3 align-middle">
-                            <span>Life on Planet Mercury: <br> Tan, Relaxing and Fabulous</span>
-                            <br>
-                            <span class="align-left article-details"><img class="article-author-img rounded-circle" src="{{ asset('images/astronaut-profile.png') }}"> Amy Oort </span>
-                            <span class="pl-5 article-details float-right"> 6 days ago</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="article-container my-1">
-                    <a href="#">
-                        <img class="article-img" src="{{ asset('images/lightspeed.png') }}">
-                        <div class="article-title d-inline-block pl-3 align-middle">
-                            <span>Light Speed Travel: <br> Fountain of Youth or Fallacy</span>
-                            <br>
-                            <span class="align-left article-details"><img class="article-author-img rounded-circle" src="{{ asset('images/astronaut-profile.png') }}"> Amy Oort </span>
-                            <span class="pl-5 article-details float-right"> 2 weeks ago</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                    {% endif %}
+                {% endfor %}
+
         </div>
     </div>
 {% endblock %}
