@@ -16,4 +16,15 @@ class HomeController extends AbstractController
     {
         return $this->render('home/home_page.html.twig');
     }
+
+    /**
+     * @Route("homepage/calendar_show/{slug}", name="calendar_show")
+     */
+    public function show($slug)
+    {
+
+        return $this->render('home/show.html.twig', [
+            'title' => ucwords(str_replace('-', ' ', $slug)),
+        ]);
+    }
 }

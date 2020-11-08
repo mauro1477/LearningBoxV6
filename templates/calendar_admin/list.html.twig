@@ -3,20 +3,20 @@
     <a href="{{ path('admin_calendar_new') }}" class="btn btn-primary pull-right">
         Create <span class="fa fa-plus-circle"></span>
     </a>
-    <h1>All Projects</h1>
+    <h1>Calendar Days</h1>
     <table class="table">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>edit</th>
-            <th>Published</th>
+            <th>Day</th>
+            <th>Edit</th>
+            <th>Published Day</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
         {% for calendar in calendars %}
             <tr>
-                <td>{{ calendar.fileName }}</td>
+                <td>{{ calendar.title }}</td>
                 <td>
                     <a href="{{ path('admin_calendar_edit', {
                         id: calendar.id

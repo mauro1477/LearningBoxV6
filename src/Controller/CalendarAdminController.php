@@ -27,25 +27,19 @@ class CalendarAdminController extends AbstractController
     public function new(EntityManagerInterface $em, Request $request, UploaderHelper $uploaderHelper)
     {
         $form = $this->createForm(CalendarFormType::class);
-
         $form->handleRequest($request);#magic
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var @var Calendar $calendar */
             $calendar = $form->getData();
-
-            /** @var UploadedFile $uploadedFile */
-            $uploadedFile = $form['imageFile']->getData();
-
-            if($uploadedFile){
-                $newFilename = $uploaderHelper->uploadCalendarImage($uploadedFile, $calendar->getImageFilename());
-                $calendar->setImageFilename($newFilename);
-            }
+            $title = $calendar->getTitle();
+            $calendar = $calendar->setSlug($title);
             $em->persist($calendar);
             $em->flush();
             $this->addFlash('success', 'Form created!');
             return $this->redirectToRoute('admin_calendar_list');
         }
+
         return $this->render('calendar_admin/new.html.twig', [
             'calendarForm' => $form->createView()
         ]);
@@ -60,14 +54,6 @@ class CalendarAdminController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $uploadedFile */
-            $uploadedFile = $form['imageFile']->getData();
-
-            if($uploadedFile){
-                $newFilename = $uploaderHelper->uploadCalendarImage($uploadedFile, $calendar->getImageFilename());
-                $calendar->setImageFilename($newFilename);
-            }
-
             $em->persist($calendar);
             $em->flush();
 

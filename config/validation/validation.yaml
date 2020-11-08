@@ -1,10 +1,10 @@
 App\Entity\Calendar:
   properties:
-    fileName:
-      - NotBlank: ~
-      - Length:
-          min: 3
-          max: 20
+#    fileName:
+#      - NotBlank: ~
+#      - Length:
+#          min: 3
+#          max: 20
 
 
 

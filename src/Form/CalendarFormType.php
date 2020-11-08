@@ -17,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CalendarFormType extends AbstractType
 {
-
     private $calendarRepository;
 
     public function __construct(CalendarRepository  $calendarRepository)
@@ -33,35 +32,13 @@ class CalendarFormType extends AbstractType
         $isEdit = $calendar && $calendar->getId();
 
         $builder
-            ->add('fileName', TextType::class, [
-                'help' => "Name a file"
+            ->add('title', TextType::class,[
+                'label' => 'Day title'
+            ])
+            ->add('content',TextType::class, [
+                'label' => 'Daily Notes'
             ]);
 
-//            $imageConstraints = [
-//                new Image([
-//                    'maxSize' => '2024k',
-//                    'mimeTypes' => [
-//                        'application/pdf',
-//                        'application/x-pdf',
-//                    ],
-//                    'mimeTypesMessage' => 'Please upload a valid PDF document',
-//                ])
-//            ];
-
-//        if (!$isEdit || !$calendar->getImageFilename()) {
-//            $imageConstraints[] = new NotNull([
-//                'message' => 'Please upload a file',
-//            ]);
-//        }
-
-
-        $builder
-            ->add('imageFile', FileType::class, [
-                'mapped' => false,
-                'required' => false,
-//               'constraints' => $imageConstraints
-            
-            ]);
 
         $builder
             ->add('PublishedAt', ChoiceType::class, [
@@ -81,7 +58,5 @@ class CalendarFormType extends AbstractType
             'data_class' => Calendar::class
         ]);
     }
-
 }
-
 ?>

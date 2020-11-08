@@ -1,10 +1,6 @@
 {{ form_start(calendarForm) }}
-    {{ form_row(calendarForm.fileName) }}
-    {{ form_row(calendarForm.imageFile, {
-        attr:{
-            placeholder: 'Select an image'
-        }
-    }) }}
+    {{ form_row(calendarForm.title) }}
+    {{ form_row(calendarForm.content) }}
     {{ form_row(calendarForm.PublishedAt) }}
     <button type="submit" class="btn btn-primary"> {{ button_text }}</button>
 {{ form_end(calendarForm) }}

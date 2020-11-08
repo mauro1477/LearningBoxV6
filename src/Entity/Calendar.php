@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\CallbackValidator;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
@@ -28,17 +29,6 @@ class Calendar
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
-     */
-    private $fileName;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $imageFilename;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $PublishedAt;
@@ -49,6 +39,21 @@ class Calendar
      */
     private $categoryReferences;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $content;
+
     public function __construct()
     {
         $this->categoryReferences = new ArrayCollection();
@@ -57,40 +62,6 @@ class Calendar
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getFileName(): ?string
-    {
-        return $this->fileName;
-    }
-
-    public function setFileName(string $fileName): self
-    {
-        $this->fileName = $fileName;
-
-        return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getFileName();
-    }
-
-    public function getImageFilename(): ?string
-    {
-        return $this->imageFilename;
-    }
-
-    public function setImageFilename(?string $imageFilename): self
-    {
-        $this->imageFilename = $imageFilename;
-
-        return $this;
-    }
-
-    public function getImagePath()
-    {
-        return 'uploads/calendar_image/'.$this->getImageFilename();
     }
 
     public function getPublishedAt(): ?bool
@@ -115,6 +86,42 @@ class Calendar
     public function getCategoryReferences(): Collection
     {
         return $this->categoryReferences;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
     }
 
 }
